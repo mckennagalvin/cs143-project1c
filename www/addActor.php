@@ -4,21 +4,28 @@
 
 	<head>
 		<title>Add Actor</title>
+		<link rel="stylesheet" type="text/css" href="style.php">
 	</head>	
+
+	<?php include("navigation.php"); ?>
 
 	<body>
 
-		<p>Add actor:</p>
+		<div class = "container">
 
-		<form method="GET" action="#">
-            First Name: 	<input type="text" name="first" maxlength="20"><br/>
-        	Last Name: 		<input type="text" name="last" maxlength="20"><br/>
-        	Sex:			<input type="radio" name="sex" value="Male" checked="true">Male
-							<input type="radio" name="sex" value="Female">Female<br/>
-			Date of Birth:  <input type="text" name="dob"><br/>
-			Date of Death:	<input type="text" name="dod"> (leave blank if alive now)<br/>
-            <input type="submit" value="Add actor" />
-        </form>
+			<p>Add actor:</p>
+
+			<form method="GET" action="#">
+	            First Name: 	<input type="text" name="first" maxlength="20"><br/>
+	        	Last Name: 		<input type="text" name="last" maxlength="20"><br/>
+	        	Sex:			<input type="radio" name="sex" value="Male" checked="true">Male
+								<input type="radio" name="sex" value="Female">Female<br/>
+				Date of Birth:  <input type="text" name="dob"><br/>
+				Date of Death:	<input type="text" name="dod"> (leave blank if alive now)<br/>
+	            <input type="submit" value="Add actor" />
+	        </form>
+
+    	</div>
 
 	</body>
 

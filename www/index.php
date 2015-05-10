@@ -4,11 +4,15 @@
 
     <head>
         <title>CS 143 Project 1C</title>
+        <link rel="stylesheet" type="text/css" href="style.php">
     </head>
 
-    <FRAMESET COLS="25%,75%" FRAMEBORDER="0" BORDER="0">
-        <FRAME NAME="nav" SRC="navigation.php">
-        <FRAME NAME="main" SRC="search.php">
-    </FRAMESET>
+    <?php include("navigation.php"); ?>
+
+    <body>
+    	<div class = "container">
+    		stuff here
+    	</div>
+    </body>
 
 </html>
