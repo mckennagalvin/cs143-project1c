@@ -13,41 +13,60 @@
 
 		<div class = "container">
 
-			<p>Add movie:</p>
+			<h1>Add movie</h1>
 
 			<form method="GET" action="#">
-	            Title: 				<input type="text" name="title" maxlength="100"><br/>
-	        	Production Company:	<input type="text" name="company" maxlength="50"><br/>
-	        	Release Year:		<input type="text" name="year" maxlength="4"><br/>
-	        	MPAA Rating:		<select name="mpaarating">
-	        							<option value=""></option>
-		        						<option value="G">G</option>
-		        						<option value="PG">PG</option>
-		        						<option value="PG-13">PG-13</option>
-		        						<option value="R">R</option>
-		        						<option value="NC-17">NC-17</option>
-		        					</select><br/>
-		        Genre:				<input type="checkbox" name="genre" value="action">Action</input>
-		        					<input type="checkbox" name="genre" value="adult">Adult</input>
-		        					<input type="checkbox" name="genre" value="adventure">Adventure</input>
-		        					<input type="checkbox" name="genre" value="animation">Animation</input>
-		        					<input type="checkbox" name="genre" value="comedy">Comedy</input>
-		        					<input type="checkbox" name="genre" value="documentary">Documentary</input>
-		        					<input type="checkbox" name="genre" value="drama">Drama</input>
-		        					<input type="checkbox" name="genre" value="family">Family</input>
-		        					<input type="checkbox" name="genre" value="fantasy">Fantasy</input>
-		        					<input type="checkbox" name="genre" value="horror">Horror</input>
-		        					<input type="checkbox" name="genre" value="musical">Musical</input>
-		        					<input type="checkbox" name="genre" value="mystery">Mystery</input>
-		        					<input type="checkbox" name="genre" value="romance">Romance</input>
-		        					<input type="checkbox" name="genre" value="sciFi">Sci-Fi</input>
-		        					<input type="checkbox" name="genre" value="short">Short</input>
-		        					<input type="checkbox" name="genre" value="thriller">Thriller</input>
-		        					<input type="checkbox" name="genre" value="war">War</input>
-		        					<input type="checkbox" name="genre" value="western">Western</input><br/>
 
+				<label>Title:</label>
+	            	<input type="text" name="title" maxlength="100"><br/>
+	            <label>Production Company:</label>
+	        		<input type="text" name="company" maxlength="50"><br/>
+	        	<label>Release Year:</label>
+	        		<input type="text" name="year" maxlength="4"><br/>
+	        	<label>MPAA Rating:</label>
+	        		<select name="mpaarating">
+						<option value=""></option>
+						<option value="G">G</option>
+						<option value="PG">PG</option>
+						<option value="PG-13">PG-13</option>
+						<option value="R">R</option>
+						<option value="NC-17">NC-17</option>
+		        	</select><br/>
+		        <label>Genre:</label>
+		        	<table class = "formTable" style="font-weight:100;font-size:11px;">
+		        		<tr>
+							<td><input type="checkbox" name="genre" value="action">Action</input></td>
+							<td><input type="checkbox" name="genre" value="adult">Adult</input></td>
+							<td><input type="checkbox" name="genre" value="adventure">Adventure</input></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="genre" value="animation">Animation</input></td>
+							<td><input type="checkbox" name="genre" value="comedy">Comedy</input></td>
+							<td><input type="checkbox" name="genre" value="documentary">Documentary</input></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="genre" value="drama">Drama</input></td>
+							<td><input type="checkbox" name="genre" value="family">Family</input></td>
+							<td><input type="checkbox" name="genre" value="fantasy">Fantasy</input></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="genre" value="horror">Horror</input></td>
+							<td><input type="checkbox" name="genre" value="musical">Musical</input></td>
+							<td><input type="checkbox" name="genre" value="mystery">Mystery</input></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="genre" value="romance">Romance</input></td>
+							<td><input type="checkbox" name="genre" value="sciFi">Sci-Fi</input></td>
+							<td><input type="checkbox" name="genre" value="short">Short</input></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="genre" value="thriller">Thriller</input></td>
+							<td><input type="checkbox" name="genre" value="war">War</input></td>
+							<td><input type="checkbox" name="genre" value="western">Western</input></td>
+						</tr>
+					</table>
 
-
+				<label></label>
 	            <input type="submit" value="Add movie" />
 
 	        </form>

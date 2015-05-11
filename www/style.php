@@ -4,7 +4,7 @@
 header('Content-Type: text/css');
 ?>
 
-<link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
 
 body {
 	margin: 0;
@@ -14,6 +14,30 @@ body {
 .container {
 	width: 50%;
 	margin: 50 auto 0 auto;
+	font-family: "Roboto", Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+h1 {
+	font-size: 28px;
+	font-weight: 100;
+	color: #333;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 5px;
+}
+
+label {
+	display: block;
+	margin-bottom: 10px;
+	width: 30%;
+	float: left;
+	text-align: right;
+	padding-right: 15px;
+}
+
+br {
+	clear: left;
 }
 
 #nav {
@@ -22,6 +46,7 @@ body {
     height: 40px;
     margin: 0;
     position: relative;
+    border-bottom: 1px solid #dbdbdb;
 }
 
 .navbar {
@@ -37,12 +62,12 @@ body {
 	text-align: center;
     float: left;
     list-style: none;
-    font-family: "Roboto", sans-serif;
-    font-weight: 300;
-    font-size: 14px;
     margin: 0;
     padding: 0;
     width: 150px;
+    font-family: "Roboto", Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 14px;
 }
 
 .navbar a {

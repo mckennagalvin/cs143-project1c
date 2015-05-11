@@ -13,15 +13,21 @@
 
 		<div class = "container">
 
-			<p>Add actor:</p>
+			<h1>Add actor</h1>
 
 			<form method="GET" action="#">
-	            First Name: 	<input type="text" name="first" maxlength="20"><br/>
-	        	Last Name: 		<input type="text" name="last" maxlength="20"><br/>
-	        	Sex:			<input type="radio" name="sex" value="Male" checked="true">Male
-								<input type="radio" name="sex" value="Female">Female<br/>
-				Date of Birth:  <input type="text" name="dob"><br/>
-				Date of Death:	<input type="text" name="dod"> (leave blank if alive now)<br/>
+				<label>First Name:</label>
+	            	<input type="text" name="first" maxlength="20"><br/>
+	            <label>Lasr Name:</label>
+	        		<input type="text" name="last" maxlength="20"><br/>
+	        	<label>Sex:</label>
+	        		<input type="radio" name="sex" value="Male" checked="true">Male
+					<input type="radio" name="sex" value="Female">Female<br/>
+				<label>Date of Birth:</label>
+					<input type="text" name="dob"><br/>
+				<label>Date of Death:</label>
+					<input type="text" name="dob"><br/>
+				<label></label>
 	            <input type="submit" value="Add actor" />
 	        </form>
 
