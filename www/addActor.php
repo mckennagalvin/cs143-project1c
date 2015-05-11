@@ -31,10 +31,6 @@
 	            <input type="submit" value="Add actor" />
 	        </form>
 
-    	</div>
-
-	</body>
-
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -74,19 +70,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	// update max ID in database
 	$updateQuery = "UPDATE MaxPersonID SET id=$maxID";
-	if(!mysql_query($updateQuery, $db_connection)
+	if(!mysql_query($updateQuery, $db_connection))
 		echo "Error updating MaxPersonID";
 
 	// insert new actor
-	$insertQuery = "INSERT INTO Actor VALUES($maxID, '$last', '$first', '$sex', '$dob', '$dod')";
-	if(mysql_query($insertQuery, $db_connection)
-		echo "Successful add!";
+	$insertQuery = "INSERT INTO Actor VALUES($maxID, $last, $first, $sex, $dob, $dod)";
+	if(mysql_query($insertQuery, $db_connection))
+		echo "Successful add of $first $last!";
 	else
 		echo "Error adding actor.";
+
 
 	// end connection
     mysql_close($db_connection);
 }	
 ?>
+
+</div>
+
+</body>
 
 </html>
