@@ -12,7 +12,13 @@
 	<body>
 
 		<div class = "container">
-			show actor
+			<h1>Actor Info</h1>
+
+			<form method="GET" action="#">
+				<label>Search for other actors:</label>
+					<input type="text" name="name">
+				<input type="submit" value="Search">
+			</form>
 		</div>
 
 	</body>
