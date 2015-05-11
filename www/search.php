@@ -12,7 +12,13 @@
 	<body>
 
 		<div class = "container">
-			search
+			<h1>Search Actors/Movies</h1>
+			<form method="GET" action="#">
+			<label>Keywords:</label>
+	            	<input type="text" name="keywords">
+	            <input type="submit" value="Search" />
+				
+			</form>
 		</div>
 
 	</body>

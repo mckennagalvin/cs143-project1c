@@ -18,7 +18,7 @@
 			<form method="GET" action="#">
 				<label>First Name:</label>
 	            	<input type="text" name="first" maxlength="20"><br/>
-	            <label>Lasr Name:</label>
+	            <label>Last Name:</label>
 	        		<input type="text" name="last" maxlength="20"><br/>
 	        	<label>Sex:</label>
 	        		<input type="radio" name="sex" value="Male" checked="true">Male
