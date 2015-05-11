@@ -66,10 +66,30 @@
 				echo $columnName . ": " . $row[0] . '<br />';
 
 				//TODO: Find the director(s) for the Movie
+				$query = "SELECT D.first, D.last, D.dob 
+							FROM Director D RIGHT JOIN 
+							(SELECT did FROM MovieDirector WHERE mid=" . $movieID . ") 
+							Q2 ON D.id=Q2.did;";
+				$rs = mysql_query($query, $db_connection);
+				$nCols = mysql_num_fields($rs);
+				$columnName = mysql_field_name($rs, 0);
+				$columnName = ucfirst($columnName);
+				$row = mysql_fetch_row($rs);
+				//echo $columnName . ": " . $row . '<br />';
+				echo "Director: ";
+				for ($i = 0; $i < $nCols; $i++) {
+	                $columnName = mysql_field_name($rs, $i);
+	                $columnName = ucfirst($columnName);
+	                if($i < 1)
+	                	echo $row[$i] . " ";
+	                else if($i == $nCols-1)
+	                	echo "(" . $row[$i] . ")";
+	                else
+	                	echo $row[$i] . ', ';
 
+	            }
 
 				echo '</p>';
-
 				echo '<hr />';
 			}
 			else
@@ -78,52 +98,30 @@
 			if($movieID){
 				echo '<p>';
 				echo '<h2>Actors in this movie: </h2>';
+
 				//List all actors in the Movie
-				//$query = "SELECT aid FROM MovieActor WHERE mid=\"" . $movieID . "\"";
-				$query = "SELECT A.first, A.last, Q2.role FROM Actor A RIGHT JOIN (SELECT aid, role FROM MovieActor WHERE mid=" . $movieID . ") Q2 ON A.id=Q2.aid;";
-				
-				//echo "$query";
-				//$q = $_GET['query'];
-				//$query = mysql_real_escape_string($q, $db_connection);
-
+				$query = "SELECT A.first, A.last, Q2.role FROM Actor A RIGHT JOIN 
+							(SELECT aid, role FROM MovieActor WHERE mid=" . $movieID . ") 
+						Q2 ON A.id=Q2.aid;";
 				$rs = mysql_query($query, $db_connection);
-				//$columnName = ucfirst($columnName);
 
-
-				// create table
-		        echo '<table border="1"
-		                     cellpadding="5"
-		                     style="width:400px;border-collapse:collapse;">';
 		        $nCols = mysql_num_fields($rs);
 
-		        //column names
-		        echo '<tr style="background-color:#eee;">';
-		        for ($i = 0; $i < $nCols; $i++) {
-		            $columnName = mysql_field_name($rs, $i);
-		            $columnName = ucfirst($columnName);
-		            echo '<td>' . $columnName . '</td>';
-		        }
-		        echo '</tr>';
-
-		        // rest of table
 		        while ($row = mysql_fetch_row($rs)) {
-		            echo '<tr>';
 		            for ($k = 0; $k < $nCols; $k++) {
 		                // TODO: handle null field?
-		                echo '<td>' . $row[$k] . '</td>';
+		                if($k == $nCols - 1)
+		                	echo "as " . $row[$k] . " ";
+		                //List the actor's names as links to their profiles
+		                else
+		                	echo '<a href=\'#\';>' . $row[$k] . " " . $row[++$k] .  ' </a>';
 		            }
-		            echo '</tr>';
+		             echo '<br />';
 		        }
-		        echo '</table>';
-
-				//TODO: Add in links to Actor's profiles
-
 		        echo '</p>';
 		    }
             mysql_close($db_connection);
         }
-        
-
 	?>
 
 	<body>
