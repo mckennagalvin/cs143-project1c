@@ -19,11 +19,10 @@
 					<input type="text" name="name">
 				<input type="submit" value="Search">
 			</form>
-		</div>
 		<?php
 
 		if($_GET["name"]) {
-	
+
             // connect to database
             $db_connection = mysql_connect("localhost", "cs143", "");
             if(!$db_connection) {
@@ -56,6 +55,8 @@
 					-DOB
 					-DOD
 	            */
+					// create table
+
 				$actorID = $row[0];
 	            for ($i = 1; $i < $nCols; $i++) {
 	                $columnName = mysql_field_name($rs, $i);
@@ -78,10 +79,9 @@
 			else
 				echo '<h1>Actor Not Found</h1>';
 
-			//Check that we got an actor ID
+			//Check that we got a valid actor ID
 			if($actorID){
-				echo '<p>';
-				echo '<h2>Movies acted in: </h2>';
+				echo '<h1>Movies acted in: </h1>';
 
 				//Find all movies the actor was in along with role he/she had
 				$query = "SELECT Q2.role as role, M.title 
@@ -91,30 +91,35 @@
 
 				$rs = mysql_query($query, $db_connection);
 		        $nCols = mysql_num_fields($rs);
+		       	echo '<table border="1"
+	                     cellpadding="5"
+	                     style="width:400px;border-collapse:collapse;">';
+	           	echo '<tr style="background-color:#eee;">';
 
+	           	for ($i = 0; $i < $nCols; $i++) {
+	            $columnName = mysql_field_name($rs, $i);
+	            $columnName = ucfirst($columnName);
+	            echo '<td>' . $columnName . '</td>';
+	        }
+	        	echo '</tr>';
 		        //output the results of the movies found
 		        while ($row = mysql_fetch_row($rs)) {
+		        	echo '<tr>';
 		            for ($k = 0; $k < $nCols; $k++) {
 		                // TODO: handle null field?
-		                echo  "As " . $row[$k] . " in <a href=\"showMovie.php?title=" . $row[$k+1] . "\";>" . $row[$k+1] .  ' </a>';
+		                echo  "<td>" . $row[$k] . " </td><td> <a href=\"showMovie.php?title=" . $row[$k+1] . "\";>" . $row[$k+1] .  ' </a></td>';
 		                $k++;
 		            }
-		             echo '<br />';
+		             echo '</tr>';
 		        }
-		        echo '</p>';
-
-		        //make the link to the movie work
-		        if($_GET['title'] != ""){
-		        	echo "yay";
-		        }
-
+		        echo "</table>";
 		    }
 
 		    //close the database
             mysql_close($db_connection);
         }
 		?>
-
+		</div>
 	</body>
 
 </html>
