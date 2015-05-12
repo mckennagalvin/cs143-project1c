@@ -123,11 +123,14 @@
 		                if($k == $nCols - 1)
 		                	echo "as " . $row[$k] . " ";
 		                //List the actor's names as links to their profiles
-		                else
-		                	echo '<a href=\'#\';>' . $row[$k] . " " . $row[++$k] .  ' </a>';
+		                else{
+		                	$names = $row[$k] . " " . $row[$k+1];
+		                	echo "<a href=\"showActor.php?name=". $names .  "\">". $names . " </a>";
+		                	$k++;
+		                }
 		            }
 		             echo '<br />';
-		        }
+		        }; 
 		        echo '</p>';
 		    }
             mysql_close($db_connection);

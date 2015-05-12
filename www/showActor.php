@@ -23,6 +23,7 @@
 		<?php
 
 		if($_GET["name"]) {
+	
             // connect to database
             $db_connection = mysql_connect("localhost", "cs143", "");
             if(!$db_connection) {
@@ -37,10 +38,8 @@
             // get input and sanitize it
             $q = $_GET['name'];
             $names = explode(' ', $q);
-            //$names = mysql_real_escape_string($q, $db_connection);
             $query = "SELECT * FROM Actor WHERE first='$names[0]' AND last = '$names[1]'"; 
 
-            //echo "$query";
             // issue query
             $rs = mysql_query($query, $db_connection);
             $nCols = mysql_num_fields($rs);
@@ -50,11 +49,12 @@
             if($row){
             	echo '<h1>Info on this actor:</h1>';
 	            echo '<p>';
-	            /*output the following info for the movie:
-					-Title
-					-Year
-					-Rating
-					-Production Company
+
+	            /*output the following info for the actor:
+					-Name
+					-Sex
+					-DOB
+					-DOD
 	            */
 				$actorID = $row[0];
 	            for ($i = 1; $i < $nCols; $i++) {
@@ -71,36 +71,46 @@
 		                if($i == $nCols-1 && $row[$i] == "")
 		                	echo "--still alive--";
 		                echo "<br />";
-
 	                }
 	            }
-
 			}
+
 			else
 				echo '<h1>Actor Not Found</h1>';
 
+			//Check that we got an actor ID
 			if($actorID){
 				echo '<p>';
 				echo '<h2>Movies acted in: </h2>';
 
-				//List all actors in the Movie
+				//Find all movies the actor was in along with role he/she had
 				$query = "SELECT Q2.role as role, M.title 
 							FROM Movie M RIGHT JOIN 
 							(SELECT mid, role FROM MovieActor WHERE aid=" . $actorID . ") 
-							Q2 ON M.id=Q2.mid;";;
-				$rs = mysql_query($query, $db_connection);
+							Q2 ON M.id=Q2.mid;";
 
+				$rs = mysql_query($query, $db_connection);
 		        $nCols = mysql_num_fields($rs);
 
+		        //output the results of the movies found
 		        while ($row = mysql_fetch_row($rs)) {
 		            for ($k = 0; $k < $nCols; $k++) {
 		                // TODO: handle null field?
-		                echo  "As " . $row[$k] . " in <a href=\'#\';>" . $row[++$k] .  ' </a>';
+		                echo  "As " . $row[$k] . " in <a href=\"showMovie.php?title=" . $row[$k+1] . "\";>" . $row[$k+1] .  ' </a>';
+		                $k++;
 		            }
 		             echo '<br />';
 		        }
 		        echo '</p>';
+
+		        //make the link to the movie work
+		        if($_GET['title'] != ""){
+		        	echo "yay";
+		        }
+
 		    }
+
+		    //close the database
             mysql_close($db_connection);
         }
 		?>
