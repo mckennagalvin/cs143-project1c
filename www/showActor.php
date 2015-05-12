@@ -12,10 +12,10 @@
 	<body>
 
 		<div class = "container">
-			<h1>Actor Info</h1>
+			<h1>Actors</h1>
 
 			<form method="GET" action="#">
-				<label>Search for other actors:</label>
+				<label>Search for actors:</label>
 					<input type="text" name="name">
 				<input type="submit" value="Search">
 			</form>
@@ -46,7 +46,7 @@
             //column names
             $row = mysql_fetch_row($rs);
             if($row){
-            	echo '<h1>Info on this actor:</h1>';
+            	echo "<h1>Result for actor: '" . $q ."'</h1>";
 	            echo '<p>';
 
 	            /*output the following info for the actor:
@@ -79,6 +79,8 @@
 			else
 				echo '<h1>Actor Not Found</h1>';
 
+
+
 			//Check that we got a valid actor ID
 			if($actorID){
 				echo '<h1>Movies acted in: </h1>';
@@ -91,17 +93,20 @@
 
 				$rs = mysql_query($query, $db_connection);
 		        $nCols = mysql_num_fields($rs);
+
+		        //begin table for output
 		       	echo '<table border="1"
 	                     cellpadding="5"
 	                     style="width:400px;border-collapse:collapse;">';
 	           	echo '<tr style="background-color:#eee;">';
 
 	           	for ($i = 0; $i < $nCols; $i++) {
-	            $columnName = mysql_field_name($rs, $i);
-	            $columnName = ucfirst($columnName);
-	            echo '<td>' . $columnName . '</td>';
-	        }
+		            $columnName = mysql_field_name($rs, $i);
+		            $columnName = ucfirst($columnName);
+		            echo '<td>' . $columnName . '</td>';
+	        	}
 	        	echo '</tr>';
+
 		        //output the results of the movies found
 		        while ($row = mysql_fetch_row($rs)) {
 		        	echo '<tr>';

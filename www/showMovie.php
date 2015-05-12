@@ -9,10 +9,10 @@
 	<body>
 	<?php include("navigation.php"); ?>
 		<div class = "container">
-			<h1>Movie Info</h1>
+			<h1>Movies</h1>
 
 			<form method="GET" action="#">
-				<label>Search for other movies:</label>
+				<label>Search for movies:</label>
 					<input type="text" name="title">
 				<input type="submit" value="Search">
 			</form>
@@ -43,7 +43,7 @@
             //column names
             $row = mysql_fetch_row($rs);
             if($row){
-            	echo '<h1>Info on this movie:</h1>';
+            	echo "<h1>Result for movie: '" . $q ."'</h1>";
 	            echo '<p>';
 	            /*output the following info for the movie:
 					-Title
@@ -89,7 +89,9 @@
 				for ($i = 0; $i < $nCols; $i++) {
 	                $columnName = mysql_field_name($rs, $i);
 	                $columnName = ucfirst($columnName);
-	                if($i < 1)
+	                if($row[$i] == "")
+	                	echo "";
+	                else if($i < 1)
 	                	echo $row[$i] . " ";
 	                else if($i == $nCols-1)
 	                	echo "(" . $row[$i] . ")";
