@@ -39,7 +39,7 @@
 
 	        //check for actors containing the keywords
 	        echo "<h1>Actors with names containing '" . $keywords . "'</h1>";
-	       	$query = "SELECT first, last, dob, dod FROM Actor WHERE first LIKE '%" . $keywords . "%' OR last LIKE '%" . $keywords . "%';"; 
+	       	$query = "SELECT CONCAT_WS(' ',first, last) as name, dob, dod FROM Actor WHERE first LIKE '%" . $keywords . "%' OR last LIKE '%" . $keywords . "%';"; 
 	       	// issue query
 	        $rs = mysql_query($query, $db_connection);
 
@@ -64,7 +64,11 @@
 	            echo '<tr>';
 	            for ($k = 0; $k < $nCols; $k++) {
 	                // TODO: handle null field?
-	                echo '<td>' . $row[$k] . '</td>';
+	                if($k==0)
+	                	echo "<td><a href=\"showActor.php?name=". $row[$k] .  
+		                			"\">". $row[$k] . "</td> </a>";
+	                else
+	                	echo '<td>' . $row[$k] . '</td>';
 	            }
 	            echo '</tr>';
 	        }
@@ -98,7 +102,10 @@
 	            echo '<tr>';
 	            for ($k = 0; $k < $nCols; $k++) {
 	                // TODO: handle null field?
-	                echo '<td>' . $row[$k] . '</td>';
+	                if($k==0)
+	                	echo "<td> <a href=\"showMovie.php?title=" . $row[$k] . "\";>" . $row[$k] .  ' </a></td>';
+	                else	
+	                	echo '<td>' . $row[$k] . '</td>';
 	            }
 	            echo '</tr>';
 	        }
