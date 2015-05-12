@@ -37,7 +37,9 @@
             // get input and sanitize it
             $q = $_GET['name'];
             $names = explode(' ', $q);
-            $query = "SELECT * FROM Actor WHERE first='$names[0]' AND last = '$names[1]'"; 
+            $query = "SELECT * 
+            			FROM Actor 
+            			WHERE first='$names[0]' AND last = '$names[1]'"; 
 
             // issue query
             $rs = mysql_query($query, $db_connection);
@@ -113,7 +115,9 @@
 		        	echo '<tr>';
 		            for ($k = 0; $k < $nCols; $k++) {
 		                // TODO: handle null field?
-		                echo  "<td>" . $row[$k] . " </td><td> <a href=\"showMovie.php?title=" . $row[$k+1] . "\";>" . $row[$k+1] .  ' </a></td>';
+		                echo  "<td>" . 
+		                	$row[$k] . " </td><td> <a href=\"showMovie.php?title=" . 
+		                	$row[$k+1] . "\";>" . $row[$k+1] .  ' </a></td>';
 		                $k++;
 		            }
 		             echo '</tr>';

@@ -38,9 +38,12 @@
 
 	        //check for actors containing the keywords
 	        echo "<h1>Actors with names containing '" . $keywords . "'</h1>";
-	       	$query = "SELECT CONCAT_WS(' ',first, last) as name, dob, dod FROM Actor WHERE first LIKE '%" . $keywords . "%' OR last LIKE '%" . $keywords . "%';"; 
+	       	$query = "SELECT CONCAT_WS(' ',first, last) as name, dob, dod 
+	       				FROM Actor 
+	       				WHERE CONCAT_WS(' ', first, last) LIKE '%" . $keywords . "%' ;"; 
 	       	// issue query
 	        $rs = mysql_query($query, $db_connection);
+
 
 
 	        // create table
@@ -74,14 +77,17 @@
 	        echo '</table>';
 
 
-
+	        /*---------------------------------------------------------*/
 
 
 	        //Search for movies that contain the keywords in their title
 	        echo "<h1>Movies containing '" . $keywords . "'</h1>";
 
 	        //select movies that contain the keyword in their title
-	        $query = "SELECT title, year FROM Movie WHERE title LIKE '%" . $keywords . "%'"; 
+	        $query = "SELECT title, year 
+	        			FROM Movie 
+	        			WHERE title LIKE '%" . $keywords . "%'"; 
+
 	        // issue query
 	        $rs = mysql_query($query, $db_connection);
 
@@ -107,7 +113,8 @@
 	            for ($k = 0; $k < $nCols; $k++) {
 	                // TODO: handle null field?
 	                if($k==0)
-	                	echo "<td> <a href=\"showMovie.php?title=" . $row[$k] . "\";>" . $row[$k] .  ' </a></td>';
+	                	echo "<td> <a href=\"showMovie.php?title=" . 
+	                		$row[$k] . "\";>" . $row[$k] .  ' </a></td>';
 	                else	
 	                	echo '<td>' . $row[$k] . '</td>';
 	            }

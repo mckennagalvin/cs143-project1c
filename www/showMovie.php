@@ -1,5 +1,4 @@
 <!-- showMovie.php: shows movie information -->
-
 <html>
 
 	<head>
@@ -34,7 +33,9 @@
             // get input and sanitize it
             $q = $_GET['title'];
 
-            $query = "SELECT * FROM Movie WHERE title=\"" . $q . "\""; 
+            $query = "SELECT * 
+            			FROM Movie 
+            			WHERE title=\"" . $q . "\""; 
 
             // issue query
             $rs = mysql_query($query, $db_connection);
@@ -66,12 +67,17 @@
 					-Director(year born)
 					-Genre
 	            */
-				//Find the Genre of the Movie
-				$query = "SELECT genre FROM MovieGenre WHERE mid=\"" . $movieID . "\"";
+				//Find the Genres of the Movie
+				$query = "SELECT genre 
+							FROM MovieGenre 
+							WHERE mid=\"" . $movieID . "\"";
+
 				$rs = mysql_query($query, $db_connection);
 				$columnName = mysql_field_name($rs, 0);
 				$columnName = ucfirst($columnName);
 				echo $columnName . ": ";
+
+				//List all genres of the movie
 				while ($row = mysql_fetch_row($rs)){
 					echo $row[0] . ", ";
 				}
@@ -80,13 +86,15 @@
 				//Find the directors for the movie
 				$query = "SELECT D.first, D.last, D.dob 
 							FROM Director D RIGHT JOIN 
-							(SELECT did FROM MovieDirector WHERE mid=" . $movieID . ") 
+							(SELECT did 
+								FROM MovieDirector 
+								WHERE mid=" . $movieID . ") 
 							Q2 ON D.id=Q2.did;";
+
 				$rs = mysql_query($query, $db_connection);
 				$nCols = mysql_num_fields($rs);
 				$columnName = mysql_field_name($rs, 0);
 				$columnName = ucfirst($columnName);
-				//$row = mysql_fetch_row($rs);
 
 				echo "Director: ";
 				while($row = mysql_fetch_row($rs)){
@@ -116,9 +124,14 @@
 				echo '<h1>Actors in this movie: </h1>';
 
 				//List all actors in the Movie
-				$query = "SELECT A.first, A.last, Q2.role FROM Actor A RIGHT JOIN 
-							(SELECT aid, role FROM MovieActor WHERE mid=" . $movieID . ") 
+				$query = "SELECT A.first, A.last, Q2.role 
+				FROM Actor A RIGHT JOIN 
+							(SELECT aid, role 
+								FROM MovieActor 
+								WHERE mid=" . $movieID . ") 
 						Q2 ON A.id=Q2.aid;";
+
+						
 				$rs = mysql_query($query, $db_connection);
 
 		        $nCols = mysql_num_fields($rs);
