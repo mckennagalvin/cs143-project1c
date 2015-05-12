@@ -17,8 +17,8 @@
 
 			<form method="POST" action="./addActorMovie.php">
 				<label>Movie:</label>
-		        		<select name="mid">
-		        			<? php
+		        		<select name="mid" style="width:200px;">
+		        			<?php
 	    						$db_connection = mysql_connect("localhost", "cs143", "");
 	    						if(!$db_connection) {
 	        						$errmsg = mysql_error($db_connection);
@@ -35,12 +35,12 @@
 			        	</select><br/>
 
 			    <label>Actor:</label>
-		        		<select name="aid">
-		        			<? php
+		        		<select name="aid" style="width:200px;">
+		        			<?php
 	    						$actorQuery = "SELECT id, first,last FROM Actor";
-	    						$rs = mysql_query($movieQuery, $db_connection);
+	    						$rs = mysql_query($actorQuery, $db_connection);
 	    						while ($row = mysql_fetch_row($rs)) {
-	                        		echo '<option value="' . $row[0] . '">' . $row[1] . ' ' . $row[2] . '</option>';
+	                        		echo '<option value="' . $row[0] . '">' . $row[2] . ', ' . $row[1] . '</option>';
 	                        	}
 		        			?>
 			        	</select><br/>
@@ -48,7 +48,8 @@
 			    <label>Role:</label>
 		            	<input type="text" name="role" maxlength="50"><br/>
 
-		        <input type="submit" value="Add actor/movie" />
+		        <label></label>
+		        	<input type="submit" value="Add actor/movie" />
 		    </form>
 
 
@@ -72,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo "Successful add!";
 	else
 		echo "Error adding to MovieActor relation";
-	
+
 	// end connection
     mysql_close($db_connection);
 }	

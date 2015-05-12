@@ -75,7 +75,7 @@
 <?php
 
 
-//if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 	// connect to database
@@ -114,14 +114,14 @@
 	// update max ID in database
 	$updateQuery = "UPDATE MaxMovieID SET id=$maxID";
 	if(!mysql_query($updateQuery, $db_connection))
-		echo "Error updating MaxMovieID";
+		echo "Error updating MaxMovieID. ";
 
 	// insert new movie
 	$insertQuery = "INSERT INTO Movie VALUES($maxID, $title, $year, $rating, $company)";
 	if(mysql_query($insertQuery, $db_connection))
 		echo "Successful add of $title to Movie relation!";
 	else
-		echo "Error adding to Movie relation.";
+		echo "Error adding to Movie relation. ";
 
 
 
@@ -134,14 +134,14 @@
 			if(mysql_query($insertGenreQuery, $db_connection))
 				echo "Successful add of $genre to movie ID $maxID!";
 			else
-				echo "Error adding to MovieGenre relation.";
+				echo "Error adding to MovieGenre relation. ";
 		}
 	}
 
 	// end connection
     mysql_close($db_connection);
     
-//}	
+}	
 ?>
 
 </div>
