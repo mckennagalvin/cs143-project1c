@@ -83,8 +83,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	// insert new actor
 	$insertQuery = "INSERT INTO Actor VALUES('$maxID', '$last', '$first', '$sex', '$dob', '$dod')";
-	if(mysql_query($insertQuery, $db_connection))
-		echo "Successful add of $first $last!";
+	if(mysql_query($insertQuery, $db_connection)) {
+		if (!mysql_error())
+			echo "Successful add of $first $last!";
+		else
+			echo "Error:" . mysql_errno();
+	}
 	else
 		echo "Error adding actor.";
 	

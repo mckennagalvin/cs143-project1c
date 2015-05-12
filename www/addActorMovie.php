@@ -69,8 +69,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	// add to MovieActor
 	$insertQuery = "INSERT INTO MovieActor VALUES('$mid', '$aid', '$role')";
-	if(mysql_query($insertQuery, $db_connection))
-		echo "Successful add!";
+	if(mysql_query($insertQuery, $db_connection)) {
+		if (!mysql_error())
+			echo "Successful add!";
+		else
+			echo "Error:" . mysql_errno();
+	}
 	else
 		echo "Error adding to MovieActor relation";
 
