@@ -6,8 +6,18 @@
 		<title>Show Movie</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>	
+	<body>
+	<?php include("navigation.php"); ?>
+		<div class = "container">
+			<h1>Movie Info</h1>
 
-	<?php include("navigation.php");
+			<form method="GET" action="#">
+				<label>Search for other movies:</label>
+					<input type="text" name="title">
+				<input type="submit" value="Search">
+			</form>
+		</div>
+	<?php
 
 		if($_GET["title"]) {
             // connect to database
@@ -113,28 +123,21 @@
 		                if($k == $nCols - 1)
 		                	echo "as " . $row[$k] . " ";
 		                //List the actor's names as links to their profiles
-		                else
-		                	echo '<a href=\'#\';>' . $row[$k] . " " . $row[++$k] .  ' </a>';
+		                else{
+		                	$names = $row[$k] . " " . $row[$k+1];
+		                	echo "<a href=\"showActor.php?name=". $names .  "\">". $names . " </a>";
+		                	$k++;
+		                }
 		            }
 		             echo '<br />';
-		        }
+		        }; 
 		        echo '</p>';
 		    }
             mysql_close($db_connection);
         }
 	?>
 
-	<body>
 
-		<div class = "container">
-			<h1>Movie Info</h1>
-
-			<form method="GET" action="#">
-				<label>Search for other movies:</label>
-					<input type="text" name="title">
-				<input type="submit" value="Search">
-			</form>
-		</div>
 
 	</body>
 
