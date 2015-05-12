@@ -26,7 +26,7 @@
 				<label>Date of Birth:</label>
 					<input type="text" name="dob"><br/>
 				<label>Date of Death:</label>
-					<input type="text" name="dob"><br/>
+					<input type="text" name="dod"><br/>
 				<label></label>
 	            <input type="submit" value="Add actor" />
 	        </form>
