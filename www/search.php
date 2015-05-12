@@ -19,7 +19,6 @@
 			</form>
 
 	<?php 
-
 	    if($_GET["keywords"]) {
 
 	        // connect to database
@@ -50,7 +49,7 @@
 	                     style="width:400px;border-collapse:collapse;">';
 	        $nCols = mysql_num_fields($rs);
 
-	        //column names
+	        //List all Actors that match either first or last name to keywords
 	        echo '<tr style="background-color:#eee;">';
 	        for ($i = 0; $i < $nCols; $i++) {
 	            $columnName = mysql_field_name($rs, $i);
@@ -59,7 +58,7 @@
 	        }
 	        echo '</tr>';
 
-	        // rest of table
+	        //output all actor results
 	        while ($row = mysql_fetch_row($rs)) {
 	            echo '<tr>';
 	            for ($k = 0; $k < $nCols; $k++) {
@@ -74,6 +73,11 @@
 	        }
 	        echo '</table>';
 
+
+
+
+
+	        //Search for movies that contain the keywords in their title
 	        echo "<h1>Movies containing '" . $keywords . "'</h1>";
 
 	        //select movies that contain the keyword in their title
@@ -82,13 +86,13 @@
 	        $rs = mysql_query($query, $db_connection);
 
 
-	        // create table
+	        // create table of all movies
 	        echo '<table border="1"
 	                     cellpadding="5"
 	                     style="width:400px;border-collapse:collapse;">';
 	        $nCols = mysql_num_fields($rs);
 
-	        //column names
+	        //List all movies that contain the keywords
 	        echo '<tr style="background-color:#eee;">';
 	        for ($i = 0; $i < $nCols; $i++) {
 	            $columnName = mysql_field_name($rs, $i);

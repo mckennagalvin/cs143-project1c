@@ -71,10 +71,13 @@
 				$rs = mysql_query($query, $db_connection);
 				$columnName = mysql_field_name($rs, 0);
 				$columnName = ucfirst($columnName);
-				$row = mysql_fetch_row($rs);
-				echo $columnName . ": " . $row[0] . '<br />';
+				echo $columnName . ": ";
+				while ($row = mysql_fetch_row($rs)){
+					echo $row[0] . ", ";
+				}
+				echo "<br />";
 
-				//TODO: Find the director(s) for the Movie
+				//Find the directors for the movie
 				$query = "SELECT D.first, D.last, D.dob 
 							FROM Director D RIGHT JOIN 
 							(SELECT did FROM MovieDirector WHERE mid=" . $movieID . ") 
@@ -83,22 +86,24 @@
 				$nCols = mysql_num_fields($rs);
 				$columnName = mysql_field_name($rs, 0);
 				$columnName = ucfirst($columnName);
-				$row = mysql_fetch_row($rs);
-				//echo $columnName . ": " . $row . '<br />';
-				echo "Director: ";
-				for ($i = 0; $i < $nCols; $i++) {
-	                $columnName = mysql_field_name($rs, $i);
-	                $columnName = ucfirst($columnName);
-	                if($row[$i] == "")
-	                	echo "";
-	                else if($i < 1)
-	                	echo $row[$i] . " ";
-	                else if($i == $nCols-1)
-	                	echo "(" . $row[$i] . ")";
-	                else
-	                	echo $row[$i] . ', ';
+				//$row = mysql_fetch_row($rs);
 
-	            }
+				echo "Director: ";
+				while($row = mysql_fetch_row($rs)){
+
+					for ($i = 0; $i < $nCols; $i++) {
+		                $columnName = mysql_field_name($rs, $i);
+		                $columnName = ucfirst($columnName);
+		                if($row[$i] == "")
+		                	echo "";
+		                else if($i < 1)
+		                	echo $row[$i] . " ";
+		                else if($i == $nCols-1)
+		                	echo "(" . $row[$i] . ") ";
+		                else
+		                	echo $row[$i] . ', ';
+		            }
+	        }
 
 				echo '</p>';
 				echo '<hr />';

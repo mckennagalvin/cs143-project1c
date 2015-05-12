@@ -81,6 +81,7 @@
 
 
 
+
 			//Check that we got a valid actor ID
 			if($actorID){
 				echo '<h1>Movies acted in: </h1>';
