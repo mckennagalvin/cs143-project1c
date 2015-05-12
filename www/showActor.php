@@ -48,8 +48,7 @@
             //column names
             $row = mysql_fetch_row($rs);
             if($row){
-            	echo "<h1>Result for actor: '" . $q ."'</h1>";
-	            echo '<p>';
+            	echo "<h2>Result for actor: '" . $q ."'</h2>";
 
 	            /*output the following info for the actor:
 					-Name
@@ -79,14 +78,14 @@
 			}
 
 			else
-				echo '<h1>Actor Not Found</h1>';
+				echo '<h2>Actor Not Found</h2>';
 
 
 
 
 			//Check that we got a valid actor ID
 			if($actorID){
-				echo '<h1>Movies acted in: </h1>';
+				echo '<h2>Movies acted in: </h2>';
 
 				//Find all movies the actor was in along with role he/she had
 				$query = "SELECT Q2.role as role, M.title 
@@ -98,15 +97,13 @@
 		        $nCols = mysql_num_fields($rs);
 
 		        //begin table for output
-		       	echo '<table border="1"
-	                     cellpadding="5"
-	                     style="width:400px;border-collapse:collapse;">';
-	           	echo '<tr style="background-color:#eee;">';
+		       	echo '<table class = "resultTable">';
+	           	echo '<tr>';
 
 	           	for ($i = 0; $i < $nCols; $i++) {
 		            $columnName = mysql_field_name($rs, $i);
 		            $columnName = ucfirst($columnName);
-		            echo '<td>' . $columnName . '</td>';
+		            echo '<th>' . $columnName . '</th>';
 	        	}
 	        	echo '</tr>';
 

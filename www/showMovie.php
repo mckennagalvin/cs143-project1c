@@ -44,8 +44,7 @@
             //column names
             $row = mysql_fetch_row($rs);
             if($row){
-            	echo "<h1>Result for movie: '" . $q ."'</h1>";
-	            echo '<p>';
+            	echo "<h2>Result for movie: '" . $q ."'</h2>";
 	            /*output the following info for the movie:
 					-Title
 					-Year
@@ -113,15 +112,13 @@
 		            }
 	        }
 
-				echo '</p>';
-				echo '<hr />';
 			}
 			else
-				echo '<h1>Movie Not Found</h1>';
+				echo '<h2>Movie Not Found</h2>';
 
 			if($movieID){
 				echo '<p>';
-				echo '<h1>Actors in this movie: </h1>';
+				echo '<h2>Actors in this movie: </h2>';
 
 				//List all actors in the Movie
 				$query = "SELECT A.first, A.last, Q2.role 
@@ -136,19 +133,17 @@
 
 		        $nCols = mysql_num_fields($rs);
 
-		        echo '<table border="1"
-	                     cellpadding="5"
-	                     style="width:400px;border-collapse:collapse;">';
-	           	echo '<tr style="background-color:#eee;">';
+		        echo '<table class = "resultTable">';
+	           	echo '<tr>';
 	           	
 	           	for ($i = 1; $i < $nCols; $i++) {
 		            $columnName = mysql_field_name($rs, $i);
 		            $columnName = ucfirst($columnName);
 		            if($i == 1){
-		            	echo "<td> Actor </td>";
+		            	echo "<th> Actor </th>";
 		            }
 		            else
-		            	echo '<td>' . $columnName . '</td>';
+		            	echo '<th>' . $columnName . '</th>';
 	        	}
 	        	echo '</tr>';
 

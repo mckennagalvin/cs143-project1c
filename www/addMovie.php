@@ -101,6 +101,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$sex = mysql_real_escape_string($year, $db_connection);
 	$dob = mysql_real_escape_string($rating, $db_connection);
 
+	// handle empty fields
+	if ($title=="" || $year=="")
+		echo "Some required fields are missing. Please try again.";
+	else {
 
 
 	// add movie
@@ -117,11 +121,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo "Error updating MaxMovieID. ";
 
 	// insert new movie
-	$insertQuery = "INSERT INTO Movie VALUES($maxID, $title, $year, $rating, $company)";
-	if(mysql_query($insertQuery, $db_connection))
-		echo "Successful add of $title to Movie relation!";
+	$insertQuery = "INSERT INTO Movie VALUES('$maxID', '$title', '$year', '$rating', '$company')";
+
+	$result = mysql_query($insertQuery, $db_connection);
+	if(!$result) {
+		$message  = 'Invalid query: ' . mysql_error() . "\n";
+    	$message .= 'Whole query: ' . $insertQuery;
+    	die($message);
+	}	
 	else
-		echo "Error adding to Movie relation. ";
+		echo "Successful add of $title to Movie relation!</br>";
 
 
 
@@ -130,14 +139,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (isset($_POST["genre"])) {
 		foreach($_POST["genre"] as $genre) {
 			// insert new movie
-			$insertGenreQuery = "INSERT INTO MovieGenre VALUES($maxID, $genre)";
+			$insertGenreQuery = "INSERT INTO MovieGenre VALUES('$maxID', '$genre')";
 			if(mysql_query($insertGenreQuery, $db_connection))
-				echo "Successful add of $genre to movie ID $maxID!";
+				echo "Successful add of $genre to movie ID $maxID!<br/>";
 			else
 				echo "Error adding to MovieGenre relation. ";
 		}
 	}
 
+	}
 	// end connection
     mysql_close($db_connection);
     

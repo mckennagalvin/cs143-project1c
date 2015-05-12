@@ -37,7 +37,7 @@
 	        $keywords = mysql_real_escape_string($q, $db_connection);
 
 	        //check for actors containing the keywords
-	        echo "<h1>Actors with names containing '" . $keywords . "'</h1>";
+	        echo "<h2>Actors with names containing '" . $keywords . "'</h2>";
 	       	$query = "SELECT CONCAT_WS(' ',first, last) as name, dob, dod 
 	       				FROM Actor 
 	       				WHERE CONCAT_WS(' ', first, last) LIKE '%" . $keywords . "%' ;"; 
@@ -47,17 +47,15 @@
 
 
 	        // create table
-	        echo '<table border="1"
-	                     cellpadding="5"
-	                     style="width:400px;border-collapse:collapse;">';
+	        echo '<table class = "resultTable">';
 	        $nCols = mysql_num_fields($rs);
 
 	        //List all Actors that match either first or last name to keywords
-	        echo '<tr style="background-color:#eee;">';
+	        echo '<tr>';
 	        for ($i = 0; $i < $nCols; $i++) {
 	            $columnName = mysql_field_name($rs, $i);
 	            $columnName = ucfirst($columnName);
-	            echo '<td>' . $columnName . '</td>';
+	            echo '<th>' . $columnName . '</th>';
 	        }
 	        echo '</tr>';
 
@@ -81,7 +79,7 @@
 
 
 	        //Search for movies that contain the keywords in their title
-	        echo "<h1>Movies containing '" . $keywords . "'</h1>";
+	        echo "<h2>Movies containing '" . $keywords . "'</h2>";
 
 	        //select movies that contain the keyword in their title
 	        $query = "SELECT title, year 
@@ -93,17 +91,15 @@
 
 
 	        // create table of all movies
-	        echo '<table border="1"
-	                     cellpadding="5"
-	                     style="width:400px;border-collapse:collapse;">';
+	        echo '<table class = "resultTable">';
 	        $nCols = mysql_num_fields($rs);
 
 	        //List all movies that contain the keywords
-	        echo '<tr style="background-color:#eee;">';
+	        echo '<tr>';
 	        for ($i = 0; $i < $nCols; $i++) {
 	            $columnName = mysql_field_name($rs, $i);
 	            $columnName = ucfirst($columnName);
-	            echo '<td>' . $columnName . '</td>';
+	            echo '<th>' . $columnName . '</th>';
 	        }
 	        echo '</tr>';
 

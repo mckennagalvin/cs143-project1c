@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // select database
     mysql_select_db("CS143", $db_connection);
 
+
     // get input
     $first = $_POST["first"];
 	$last = $_POST["last"];
@@ -53,12 +54,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$dob = $_POST["dob"];
 	$dod = $_POST["dod"];
 
+	// handle empty fields
+	if ($first=="" || $dob=="")
+		echo "Some required fields are missing. Please try again.";
+	else {
+
+
     // sanitize input
 	$first = mysql_real_escape_string($first, $db_connection);
 	$last = mysql_real_escape_string($last, $db_connection);
 	$sex = mysql_real_escape_string($sex, $db_connection);
 	$dob = mysql_real_escape_string($dob, $db_connection);
 	$dod = mysql_real_escape_string($dod, $db_connection);
+
 
 	// add actor
 
@@ -74,12 +82,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo "Error updating MaxPersonID";
 
 	// insert new actor
-	$insertQuery = "INSERT INTO Actor VALUES($maxID, $last, $first, $sex, $dob, $dod)";
+	$insertQuery = "INSERT INTO Actor VALUES('$maxID', '$last', '$first', '$sex', '$dob', '$dod')";
 	if(mysql_query($insertQuery, $db_connection))
 		echo "Successful add of $first $last!";
 	else
 		echo "Error adding actor.";
-
+	
+	}
 
 	// end connection
     mysql_close($db_connection);

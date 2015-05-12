@@ -37,7 +37,7 @@
 			    <label>Actor:</label>
 		        		<select name="aid" style="width:200px;">
 		        			<?php
-	    						$actorQuery = "SELECT id, first,last FROM Actor";
+	    						$actorQuery = "SELECT id, first, last FROM Actor";
 	    						$rs = mysql_query($actorQuery, $db_connection);
 	    						while ($row = mysql_fetch_row($rs)) {
 	                        		echo '<option value="' . $row[0] . '">' . $row[2] . ', ' . $row[1] . '</option>';
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$role = mysql_real_escape_string($role, $db_connection);
 
 	// add to MovieActor
-	$insertQuery = "INSERT INTO MovieActor VALUES($mid, $aid, $role)";
+	$insertQuery = "INSERT INTO MovieActor VALUES('$mid', '$aid', '$role')";
 	if(mysql_query($insertQuery, $db_connection))
 		echo "Successful add!";
 	else

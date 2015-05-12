@@ -19,12 +19,17 @@ body {
     font-size: 14px;
 }
 
-h1 {
+h1, h2 {
 	font-size: 28px;
 	font-weight: 100;
 	color: #333;
 	border-bottom: 1px solid #ddd;
 	padding-bottom: 5px;
+}
+
+h2 {
+	font-size: 20px;
+	margin-top: 50px;
 }
 
 .introOuter {
@@ -62,6 +67,29 @@ label {
 br {
 	clear: left;
 }
+
+.resultTable {
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 50px;
+}
+
+.resultTable, .resultTable td, .resultTable th {
+	border: 1px solid #999;
+	font-weight: 100;
+}
+
+.resultTable td, .resultTable th, .resultTable td a {
+	padding: 5px;
+	color: #000;
+}
+
+th {
+	background: #eee;
+	text-align: left;
+	font-weight: none;
+}
+
 
 #nav {
     background-color: #eee;
