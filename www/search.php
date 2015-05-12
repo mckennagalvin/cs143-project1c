@@ -37,10 +37,11 @@
 	        $keywords = mysql_real_escape_string($q, $db_connection);
 
 	        //check for actors containing the keywords
-	        echo "<h2>Actors with names containing '" . $keywords . "'</h2>";
+	        echo "<h2>Actors with names containing '" . $q . "'</h2>";
 	       	$query = "SELECT CONCAT_WS(' ',first, last) as name, dob, dod 
 	       				FROM Actor 
-	       				WHERE CONCAT_WS(' ', first, last) LIKE '%" . $keywords . "%' ;"; 
+	       				WHERE CONCAT_WS(' ', first, last) LIKE '%" . $keywords . "%' 
+	       				ORDER BY name ASC;"; 
 	       	// issue query
 	        $rs = mysql_query($query, $db_connection);
 
@@ -79,7 +80,7 @@
 
 
 	        //Search for movies that contain the keywords in their title
-	        echo "<h2>Movies containing '" . $keywords . "'</h2>";
+	        echo "<h2>Movies containing '" . $q . "'</h2>";
 
 	        //select movies that contain the keyword in their title
 	        $query = "SELECT title, year 

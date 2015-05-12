@@ -37,6 +37,12 @@
             // get input and sanitize it
             $q = $_GET['name'];
             $names = explode(' ', $q);
+
+            //create escape string for each name given
+            foreach($names as &$value){
+            	$value = mysql_real_escape_string($value, $db_connection);
+            }
+
             $query = "SELECT * 
             			FROM Actor 
             			WHERE first='$names[0]' AND last = '$names[1]'"; 
@@ -56,8 +62,7 @@
 					-DOB
 					-DOD
 	            */
-					// create table
-
+				// create table
 				$actorID = $row[0];
 	            for ($i = 1; $i < $nCols; $i++) {
 	                $columnName = mysql_field_name($rs, $i);
@@ -83,14 +88,16 @@
 
 
 
-			//Check that we got a valid actor ID
+			//Check that we have a valid actor ID
 			if($actorID){
 				echo '<h2>Movies acted in: </h2>';
 
 				//Find all movies the actor was in along with role he/she had
 				$query = "SELECT Q2.role as role, M.title 
 							FROM Movie M RIGHT JOIN 
-							(SELECT mid, role FROM MovieActor WHERE aid=" . $actorID . ") 
+							(SELECT mid, role 
+								FROM MovieActor 
+								WHERE aid=" . $actorID . ") 
 							Q2 ON M.id=Q2.mid;";
 
 				$rs = mysql_query($query, $db_connection);

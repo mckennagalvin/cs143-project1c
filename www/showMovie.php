@@ -32,6 +32,7 @@
 
             // get input and sanitize it
             $q = $_GET['title'];
+            $q = mysql_real_escape_string($q, $db_connection);
 
             $query = "SELECT * 
             			FROM Movie 
