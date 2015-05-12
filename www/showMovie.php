@@ -9,14 +9,14 @@
 	<body>
 	<?php include("navigation.php"); ?>
 		<div class = "container">
-			<h1>Movie Info</h1>
+			<h1>Movies</h1>
 
 			<form method="GET" action="#">
-				<label>Search for other movies:</label>
+				<label>Search for movies:</label>
 					<input type="text" name="title">
 				<input type="submit" value="Search">
 			</form>
-		</div>
+		
 	<?php
 
 		if($_GET["title"]) {
@@ -43,7 +43,7 @@
             //column names
             $row = mysql_fetch_row($rs);
             if($row){
-            	echo '<h1>Info on this movie:</h1>';
+            	echo "<h1>Result for movie: '" . $q ."'</h1>";
 	            echo '<p>';
 	            /*output the following info for the movie:
 					-Title
@@ -66,16 +66,18 @@
 					-Director(year born)
 					-Genre
 	            */
-
 				//Find the Genre of the Movie
 				$query = "SELECT genre FROM MovieGenre WHERE mid=\"" . $movieID . "\"";
 				$rs = mysql_query($query, $db_connection);
 				$columnName = mysql_field_name($rs, 0);
 				$columnName = ucfirst($columnName);
-				$row = mysql_fetch_row($rs);
-				echo $columnName . ": " . $row[0] . '<br />';
+				echo $columnName . ": ";
+				while ($row = mysql_fetch_row($rs)){
+					echo $row[0] . ", ";
+				}
+				echo "<br />";
 
-				//TODO: Find the director(s) for the Movie
+				//Find the directors for the movie
 				$query = "SELECT D.first, D.last, D.dob 
 							FROM Director D RIGHT JOIN 
 							(SELECT did FROM MovieDirector WHERE mid=" . $movieID . ") 
@@ -84,20 +86,24 @@
 				$nCols = mysql_num_fields($rs);
 				$columnName = mysql_field_name($rs, 0);
 				$columnName = ucfirst($columnName);
-				$row = mysql_fetch_row($rs);
-				//echo $columnName . ": " . $row . '<br />';
-				echo "Director: ";
-				for ($i = 0; $i < $nCols; $i++) {
-	                $columnName = mysql_field_name($rs, $i);
-	                $columnName = ucfirst($columnName);
-	                if($i < 1)
-	                	echo $row[$i] . " ";
-	                else if($i == $nCols-1)
-	                	echo "(" . $row[$i] . ")";
-	                else
-	                	echo $row[$i] . ', ';
+				//$row = mysql_fetch_row($rs);
 
-	            }
+				echo "Director: ";
+				while($row = mysql_fetch_row($rs)){
+
+					for ($i = 0; $i < $nCols; $i++) {
+		                $columnName = mysql_field_name($rs, $i);
+		                $columnName = ucfirst($columnName);
+		                if($row[$i] == "")
+		                	echo "";
+		                else if($i < 1)
+		                	echo $row[$i] . " ";
+		                else if($i == $nCols-1)
+		                	echo "(" . $row[$i] . ") ";
+		                else
+		                	echo $row[$i] . ', ';
+		            }
+	        }
 
 				echo '</p>';
 				echo '<hr />';
@@ -107,7 +113,7 @@
 
 			if($movieID){
 				echo '<p>';
-				echo '<h2>Actors in this movie: </h2>';
+				echo '<h1>Actors in this movie: </h1>';
 
 				//List all actors in the Movie
 				$query = "SELECT A.first, A.last, Q2.role FROM Actor A RIGHT JOIN 
@@ -117,19 +123,37 @@
 
 		        $nCols = mysql_num_fields($rs);
 
+		        echo '<table border="1"
+	                     cellpadding="5"
+	                     style="width:400px;border-collapse:collapse;">';
+	           	echo '<tr style="background-color:#eee;">';
+	           	
+	           	for ($i = 1; $i < $nCols; $i++) {
+		            $columnName = mysql_field_name($rs, $i);
+		            $columnName = ucfirst($columnName);
+		            if($i == 1){
+		            	echo "<td> Actor </td>";
+		            }
+		            else
+		            	echo '<td>' . $columnName . '</td>';
+	        	}
+	        	echo '</tr>';
+
 		        while ($row = mysql_fetch_row($rs)) {
+		        	echo "<tr>";
 		            for ($k = 0; $k < $nCols; $k++) {
 		                // TODO: handle null field?
 		                if($k == $nCols - 1)
-		                	echo "as " . $row[$k] . " ";
+		                	echo "<td>" . $row[$k] . "</td> ";
 		                //List the actor's names as links to their profiles
 		                else{
 		                	$names = $row[$k] . " " . $row[$k+1];
-		                	echo "<a href=\"showActor.php?name=". $names .  "\">". $names . " </a>";
+		                	echo "<td><a href=\"showActor.php?name=". $names .  
+		                			"\">". $names . "</td> </a>";
 		                	$k++;
 		                }
 		            }
-		             echo '<br />';
+		             echo '</tr>';
 		        }; 
 		        echo '</p>';
 		    }
@@ -138,7 +162,7 @@
 	?>
 
 
-
+	</div>
 	</body>
 
 </html>
