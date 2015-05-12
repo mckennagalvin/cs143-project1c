@@ -11,7 +11,19 @@
 
     <body>
     	<div class = "container">
-    		stuff here
+    		
+            <div class = "introOuter">
+                <div class = "introInner">
+                    CS 143 PROJECT 1C
+                </div>
+            </div>
+
+            <div class = "introText">
+                Kaitlin Navarro and McKenna Galvin<br />
+                Spring 2015
+            </div>
+
+
     	</div>
     </body>
 

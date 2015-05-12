@@ -4,7 +4,7 @@
 header('Content-Type: text/css');
 ?>
 
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto:100,300' rel='stylesheet' type='text/css'>
 
 body {
 	margin: 0;
@@ -25,6 +25,29 @@ h1 {
 	color: #333;
 	border-bottom: 1px solid #ddd;
 	padding-bottom: 5px;
+}
+
+.introOuter {
+	padding: 3px;
+	border: 1px solid #ADD8C7;
+	margin-top: 40%;
+}
+
+.introInner {
+	font-size: 40px;
+	font-weight: 300;
+	text-align: center;
+	background: #ADD8C7;
+	color: #fff;
+	padding: 20px;
+}
+
+.introText {
+	font-family: "Georgia", "Times", serif;
+	text-transform: uppercase;
+	text-align: center;
+	color: #666;
+	margin-top: 20px;
 }
 
 label {
@@ -80,7 +103,7 @@ br {
 }
 
 .navbar li:hover, a:hover, .navbar li ul li a:hover {
-	background-color: #dbdbdb;
+	background-color: #ADD8C7;
 } 
 
 .navbar li ul 	{
