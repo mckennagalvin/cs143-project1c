@@ -18,6 +18,7 @@
 			<form method="POST" action="./addActorMovie.php">
 				<label>Movie:</label>
 		        		<select name="mid" style="width:200px;">
+		        			<option value=""></option>
 		        			<?php
 	    						$db_connection = mysql_connect("localhost", "cs143", "");
 	    						if(!$db_connection) {
@@ -36,6 +37,8 @@
 
 			    <label>Actor:</label>
 		        		<select name="aid" style="width:200px;">
+		        			<option value=""></option>
+		     
 		        			<?php
 	    						$actorQuery = "SELECT id, first, last FROM Actor";
 	    						$rs = mysql_query($actorQuery, $db_connection);
